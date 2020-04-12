@@ -1,0 +1,14 @@
+
+// STASH A,X,Y TO SAVE STATE/RESTORE BEFORE/AFTER SUBROUTINE CALL
+
+ASAV      .BYTE $00
+XSAV      .BYTE $00
+YSAV      .BYTE $00
+STASH     STA ASAV
+          STX XSAV
+          STY YSAV
+          RTS
+UNSTASH   LDA ASAV
+          LDX XSAV
+          LDY YSAV
+          RTS
