@@ -1,0 +1,21 @@
+/*
+ADDRESS RANGES
+
+HARDWARE           $BFFF TO $FFFF
+DOS                $9600 TO HARDWARE
+USER2              $6000 TO DOS
+PAGE2              $4000 TO USER2
+PAGE1              $2000 TO PAGE2
+USER1              $0800 TO PAGE1
+TEXT SCREEN AND OS $0000 TO USER1
+
+HI-RES SCREEN COORDINATES
+WIDTH: 40 BYTES WITH 7 PIXELS PER BYTE
+HEIGHT: 192 LINES
+RESOLUTION: 7 * 40 (280) X 192
+
+ZERO-PAGE POINTERS
+$06-$09 are unused (except by SWEET-16)
+$CC-$CF are only used by INTBASIC
+$EB-$EF and $FF appear totally unused by ROM routines
+*/

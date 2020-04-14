@@ -1,2 +1,7 @@
-*.bin
-*.sbin
+# exclude compiled binary files
+*.
+# exclude compiler trace output
+*_Output.txt
+_FileInformation.txt
+# keep old code
+!RetroAssembler/*
