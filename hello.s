@@ -1,16 +1,4 @@
-/**
-* https://enginedesigns.net/download/retroassembler.html
-* https://enginedesigns.net/post/2019/06/using-retro-assembler-with-visual-studio-code
-* https://www.codeproject.com/Articles/1200285/Cross-Assembly-for-the-Apple-II-using-MacOS
-*
-* ALT-B to build
-*/
           ORG  $6000
-          PUT Includes/equates
-
-* ZERO-PAGE POINTERS
-
-PTR       EQU  $FE      ; POINTER TO OUR MESSAGE STRING
 
 * ENTRY POINT
 
@@ -32,6 +20,10 @@ LOOP      LDA (PTR),Y   ; LOAD CHAR USING ZERO-PAGE INDIRECT INDEXING (REQUIRES 
           BNE LOOP      ; REPEAT UNTIL WE HIT THE STRING ZERO-TERMINATOR
 DONE      RTS
 
+* ZERO-PAGE POINTERS
+
+PTR       EQU  $FE      ; POINTER TO OUR MESSAGE STRING
+
 * VARIABLES
 
 * Using single quotes, the high bit is set to 0 (standard ASCII)
@@ -39,3 +31,7 @@ DONE      RTS
 
 MSG       ASC "DAVE"
           HEX 8D00
+
+* INCLUDES
+
+          PUT Includes/equates

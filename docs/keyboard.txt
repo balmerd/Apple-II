@@ -1,0 +1,24 @@
+READING THE KEYBOARD 
+
+The keyboard sends seven bits of information which together form one character. These seven 
+bits, along with another signal which indicates when a key has been pressed, are available to most 
+programs as the contents of a memory location. Programs can read the current state of the key- 
+board by reading the contents of this location. When you press a key on the keyboard, the value 
+in this location becomes 128 or greater, and the particular value it assumes is the numeric code 
+for the character which was typed. Table 3 on page 8 shows the ASCII characters and their asso- 
+ciated numeric codes. The location will hold this one value until you press another key, or until 
+your program tells the memory location to forget the character it’s holding. 
+
+Once your program has accepted and understood a keypress, it should tell the keyboard’s memory 
+location to “release” the character it is holding and prepare to receive a new one. Your program 
+can do this by referencing another memory location (STROBE). When you reference this other location, the 
+value contained in the first location will drop below 128. This value will stay low until you press 
+another key. This action is called “clearing the keyboard strobe”. Your program can either read 
+or write to the special memory location; the data which are written to or read from that location 
+are irrelevant. It is the mere reference to the location which clears the keyboard strobe. Once you 
+have cleared the keyboard strobe, you can still recover the code for the key which was last 
+pressed by adding 128 (hexadecimal $80) to the value in the keyboard location. 
+
+The CTRL and SHIFT keys generate no codes by themselves, but only alter the codes produced 
+by other keys.
+

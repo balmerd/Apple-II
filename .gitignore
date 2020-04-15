@@ -1,7 +1,5 @@
 # exclude compiled binary files
-*.
+*#066000
 # exclude compiler trace output
 *_Output.txt
 _FileInformation.txt
-# keep old code
-!RetroAssembler/*

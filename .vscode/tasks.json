@@ -6,7 +6,7 @@
     {
       "label": "Merlin32 compile",
       "type": "shell",
-      "command": "merlin.bat",
+      "command": "build.bat",
       "problemMatcher": [],
       "group": {
         "kind": "build",

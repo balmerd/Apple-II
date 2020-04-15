@@ -1,23 +1,6 @@
           ORG   $6000
-          PUT   Includes/equates
 
-* ZERO-PAGE ADDRESSES
-
-LOW       EQU   $1A
-HIGH      EQU   $1B 
-
-* JUMP OVER INCLUDES
-
-          JMP   START
-
-* INCLUDES
-
-          PUT   Includes/hires-utils
-          PUT   Includes/hires-lookup
-
-**
 * ENTRY POINT
-**
 
 START     JSR   CLRHGR1     ; CLEAR PAGE 1 (DO IT NOW SO WE DON'T SEE IT HAPPEN)
           LDA   GRAPHICS    ; SWITCH TO GRAPHICS MODE
@@ -27,17 +10,15 @@ START     JSR   CLRHGR1     ; CLEAR PAGE 1 (DO IT NOW SO WE DON'T SEE IT HAPPEN)
           JSR   DRAWSHAPE
           RTS
 
-**
-* DRAW SHAPE
-**
-
 * SHAPE VARIABLES (DS RESERVES n BYTES WITH INITIAL VALUE OF ZERO)
 
-COL       DFB   #$04        ; STARTING COLUMN NUMBER
 LINE      DFB   #$05        ; STARTING LINE NUMBER
+COL       DFB   #$04        ; STARTING COLUMN NUMBER
 HEIGHT    DFB   #$08        ; HEIGHT OF SHAPE (IN LINES)
 XCOUNT    DFB   $#00        ; INDEX TO SHAPE WIDTH, SHAPE[0] IS THE FIRST (AND ONLY) BYTE IN EACH LINE
 DEPTH     DS    1           ; COMPUTED BELOW
+
+* DRAW SHAPE
 
 DRAWSHAPE LDA   LINE
           CLC               ; ALWAYS NEED TO CLEAR CARRY BEFORE ADC
@@ -59,6 +40,8 @@ DRAWSHAPE LDA   LINE
           BLT   :NEXTLINE   ; IF NO, CONTINUE DRAW
           RTS               ; IF YES, STOP
 
+* SHAPE DATA
+
 SHAPE     HEX   08          ; 0001000 ...X...
           HEX   14          ; 0010100 ..X.X..
           HEX   08          ; 0001000 ...X...
@@ -67,3 +50,14 @@ SHAPE     HEX   08          ; 0001000 ...X...
           HEX   1C          ; 0011100 ..XXX..
           HEX   14          ; 0010100 ..X.X..
           HEX   22          ; 0100010 .X...X.
+
+* ZERO-PAGE ADDRESSES
+
+LOW       EQU   $1A
+HIGH      EQU   $1B 
+
+* INCLUDES
+
+          PUT   Includes/equates
+          PUT   Includes/hires-utils
+          PUT   Includes/hires-lookup
