@@ -8,6 +8,7 @@ START             JSR   CLRHGR1         ; CLEAR PAGE 1 (DO IT NOW SO WE DON'T SE
                   LDA   PAGE1           ; DISPLAY PAGE 1
                   LDA   FULLSCRN        ; DISPLAY FULL SCREEN
                   JSR   DRAWSHAPE       ; DRAW
+                  JSR   CONTROLLER      ; MOVE USING KEYBOARD
                   RTS
 
 * DRAW SHAPE
@@ -37,6 +38,63 @@ DRAWSHAPE         LDA   SCREEN_X
                   CMP   SHAPE_DEPTH       ; IS SHAPE DONE?
                   BLT   :LINE             ; IF NO, DRAW NEXT LINE
                   RTS                     ; IF YES, STOP
+
+* CONTROL SHAPE USING KEYBOARD
+
+CONTROLLER        JSR   KEYIN             ; GET INPUT CHARACTER
+                  CMP   RESET
+                  BEQ   :RESET
+                  CMP   MOVE_UP
+                  BEQ   :UP
+                  CMP   MOVE_DOWN
+                  BEQ   :DOWN
+                  CMP   MOVE_LEFT
+                  BEQ   :LEFT
+                  CMP   MOVE_RIGHT
+                  BEQ   :RIGHT
+                  JMP   CONTROLLER        ; CONTINUE
+                  RTS
+
+:UP               JSR   DRAWSHAPE
+                  DEC   SCREEN_Y
+                  JSR   DRAWSHAPE
+                  JMP   CONTROLLER
+
+:DOWN             JSR   DRAWSHAPE
+                  INC   SCREEN_Y
+                  JSR   DRAWSHAPE
+                  JMP   CONTROLLER
+
+:LEFT             JSR   DRAWSHAPE
+                  DEC   SCREEN_X
+                  JSR   DRAWSHAPE
+                  JMP   CONTROLLER
+
+
+:RIGHT            JSR   DRAWSHAPE
+                  INC   SCREEN_X
+                  JSR   DRAWSHAPE
+                  JMP   CONTROLLER
+
+:RESET            JSR   DRAWSHAPE
+                  STZ   SCREEN_X
+                  STZ   SCREEN_Y
+                  JSR   DRAWSHAPE
+                  JMP   CONTROLLER
+                  RTS
+
+KEYIN             LDA   READKBD           ; READ CHARACTER
+                  BPL   KEYIN             ; LOOP UNTIL BIT 7 IS SET (see docs/keyboard.txt)
+                  STA   RESETKBD          ; OTHERWISE CLEAR KEYBOARD BEFORE RETURNING
+                  RTS
+
+* CONTROLLER KEYS
+
+MOVE_UP           HEX C1                  ; "A"
+MOVE_DOWN         HEX DA                  ; "Z"
+MOVE_LEFT         HEX AC                  ; "," (the "<" character without SHIFT)
+MOVE_RIGHT        HEX AE                  ; "." (the ">" character without SHIFT)
+RESET             HEX D8                  ; "X"
 
 * SHAPE DATA
 
