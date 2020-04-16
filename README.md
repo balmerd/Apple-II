@@ -1,5 +1,7 @@
 # Apple ][ Programming
 
+Re-learning 6502 assembler using modern tools on Windows.
+
 ## Installation
   * Visual Studio Code (VSCode)
   * AppleWin (Apple ][ emulator for Windows)
@@ -13,7 +15,7 @@
   * See the README file in the "VSCode Extensions" folder for futher instructions
   * Create "build.bat" batch file to run Merlin 32:
   ```
-  ..\\Merlin32\\Merlin32.exe -V ..\\Merlin32\\Library main#066000.s
+  ..\\Merlin32\\Merlin32.exe -V ..\\Merlin32\\Library main.s (or main#066000.s for CiderPress)
   ```
 
   * Create build task to run "build.bat":

@@ -25,22 +25,22 @@ TYPEWRITER  JSR KEYIN         ; GET INPUT CHARACTER
 
 :UP         DEY
             TYA
-            ; REDRAW
+            JSR PRBYTE
             JMP TYPEWRITER    ; CONTINUE
 
 :DOWN       INY
             TYA
-            ; REDRAW
+            JSR PRBYTE
             JMP TYPEWRITER    ; CONTINUE
 
 :LEFT       DEX
             TXA
-            ; REDRAW
+            JSR PRBYTE
             JMP TYPEWRITER    ; CONTINUE
 
 :RIGHT      INX
             TXA
-            ; REDRAW
+            JSR PRBYTE
             JMP TYPEWRITER    ; CONTINUE
 
 :EXIT       RTS
