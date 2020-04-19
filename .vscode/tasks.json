@@ -6,12 +6,27 @@
     {
       "label": "Merlin32 compile",
       "type": "shell",
-      "command": "build.bat",
+      "command": "node build",
+      "args": ["${input:source}"],
       "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true
       }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "source",
+      "description": "Assembler source file",
+      "options": [
+        "animator",
+        "digits",
+        "hello",
+        "shape"
+      ],
+      "default": "hello"
     }
   ]
 }
